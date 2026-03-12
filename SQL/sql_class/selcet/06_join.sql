@@ -98,7 +98,7 @@ LEFT JOIN employee b ON a.manager_id = b.emp_id;
 -- 두 개 이상의 테이블도 join을 통해 연결할 수 있다.
 -- 각 테이블 사이의 관계를 순차적으로 join 조건에 작성한다.
 
--- 사원명, 부서명, 직급명 조회 (부서가 없ㄴ는 사원도 결과에 포함)
+-- 사원명, 부서명, 직급명 조회 (부서가 없는 사원도 결과에 포함)
 SELECT
     a.emp_name,
     b.dept_title,

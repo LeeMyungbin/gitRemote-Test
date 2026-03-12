@@ -100,6 +100,11 @@ CREATE TABLE IF NOT EXISTS user_foreign_key1
     FOREIGN KEY(grade_code) REFERENCES user_grade (grade_code)
 );
 
+-- [참고]
+-- FK를 컬럼 레벨에 작성 : REFERENCES 참조대상테이블 (참조대상컬럼)
+-- FK를 테이블 레벨에 작성 FOREIGN KEY(제약대상컬럼) REFERENCES 참조대상테이블 (참조대상컬럼)
+-- 다만 MySQL 버전에 따라 컬럼 레벨에 작성 시 가능하지 않는 경우 있어 테이블 레벨에 작성 권고
+
 -- 정상 수행
 -- 10,20,30,NULL 과 같이 부모 테이블에 존재하는 행은 fk 컬럼에서 참조해서 사용 가능
 INSERT INTO user_foreign_key1(user_no, user_id, user_pwd, user_name, gender, phone, email,grade_code)
@@ -149,3 +154,31 @@ WHERE
 
 -- 자식 테이블의 값이 NULL로 변경 되었음을 확인
 SELECT * FROM user_foreign_key2;
+
+-- 5. check
+CREATE TABLE IF NOT EXISTS user_check
+(
+    user_no INT AUTO_INCREMENT PRIMARY KEY,
+    user_name VARCHAR(255) NOT NULL,
+    gender CHAR(3) CHECK (gender IN ('남','여')),     -- 한글 값 3byte
+    age INT CHECK (age > 19)
+);
+-- gender check 제약조건 위배
+INSERT INTO user_check (user_name, gender, age)
+VALUES ('유관순', '여자', 20) ;
+-- age check 제약조건 위배
+INSERT INTO user_check (user_name, gender, age)
+VALUES ('유관순', '여', 16) ;
+
+-- 6. default
+CREATE TABLE IF NOT EXISTS tbl_country
+(
+    country_code INT AUTO_INCREMENT PRIMARY KEY,
+    country_name VARCHAR(255) DEFAULT '한국',
+    add_day DATE DEFAULT (CURRENT_DATE),
+    add_time TIME DEFAULT (CURRENT_TIME)
+);
+
+INSERT INTO tbl_country
+VALUES (NULL, DEFAULT, DEFAULT, DEFAULT);
+SELECT * FROM tbl_country;
