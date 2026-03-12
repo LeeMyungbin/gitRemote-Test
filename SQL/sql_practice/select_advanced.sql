@@ -190,4 +190,18 @@ GROUP BY b.dept_title;
 -- 13. 차장(J4) 이상 직급을 가진 직원과 사원(J7) 직급을 가진 
 -- 직원들의 급여 합계를 비교하여 결과를 출력하시오. (SET OPERATOR 사용) (2행)
 -- 1. 차장 이상(J4)의 급여 합계
-SELECT 
+SELECT
+  '차장 이상' AS '구분',
+  SUM(a.salary) AS '급여합계'
+FROM 
+  employee a
+WHERE 
+  a.job_code IN ('J1', 'J2', 'J3', 'J4')
+UNION ALL
+SELECT
+  '사원' AS '구분',
+  SUM(a.salary) AS '급여합계'
+FROM 
+  employee a
+WHERE 
+  a.job_code = 'J7';
