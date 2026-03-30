@@ -1,0 +1,14 @@
+import에서 똑같은 식별자가 충돌하지 않도록 주의
+만들어져있는 라이브러리에서 필요한걸 찾아보면서 사용
+패키지는 import 할때 뎁스가 생김
+
+<I/O챕터>
+input  -> 입력
+output ->출력
+
+writelines 여러 줄들 작성
+ctral+C 터미널 실행 종료
+
+selectbox  : 리스
+
+
